@@ -3,13 +3,27 @@ import './App.css'
 import storage from './firebase.tsx'
 import ContactForm from './components/ContactForm.tsx'
 import StoryUpload from './components/StoryUpload'
+import HamburgerNav from './components/HamburgerNav'
 
 console.log(storage)
 
 function App() {
 
+  function handleLogin() {
+    alert('Login clicked')
+  }
+
+  function handleLogout() {
+    alert('Logout clicked')
+  }
+
+  function handleSettings() {
+    alert('Settings clicked')
+  }
+
   return (
     <>
+      <HamburgerNav onLogin={handleLogin} onLogout={handleLogout} onSettings={handleSettings} />
       <div className='container'>
         <h1>Literary Submission</h1>
         <p>Writing is cool. You should write. "Lorem ipsum dolor sit amet,
