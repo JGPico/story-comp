@@ -28,30 +28,212 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2rem;
   line-height: 1.1;
+  margin: 0 0 1rem 0;
+  word-wrap: break-word;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 1.5rem 0 1rem 0;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Responsive typography */
+@media (min-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3.2em;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+  }
+  
+  p {
+    font-size: 1.3rem;
+  }
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  min-height: 44px; /* Touch-friendly minimum size */
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Responsive button styles */
+@media (min-width: 480px) {
+  button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+@media (min-width: 768px) {
+  button {
+    padding: 0.7em 1.4em;
+    font-size: 1.1em;
+  }
+}
+
+/* Form elements responsive design */
+input, textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  box-sizing: border-box;
+  min-height: 44px; /* Touch-friendly */
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+label > div {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive form layouts */
+@media (min-width: 480px) {
+  input, textarea {
+    font-size: 1.1rem;
+    padding: 14px 18px;
+  }
+  
+  label > div {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  input, textarea {
+    font-size: 1.2rem;
+    padding: 16px 20px;
+  }
+}
+
+/* File input specific styles */
+input[type="file"] {
+  padding: 8px;
+  background-color: transparent;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+input[type="file"]:hover {
+  border-color: #646cff;
+  background-color: rgba(100, 108, 255, 0.1);
+}
+
+/* Form container responsive design */
+form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+form > div {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  form > div {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  form > div {
+    max-width: 600px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -64,5 +246,29 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+  
+  input, textarea {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #213547;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #747bff;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  input[type="file"] {
+    border: 2px dashed rgba(0, 0, 0, 0.3);
+  }
+  
+  input[type="file"]:hover {
+    border-color: #747bff;
+    background-color: rgba(116, 123, 255, 0.1);
+  }
+  
+  label > div {
+    color: rgba(33, 53, 71, 0.8);
   }
 }

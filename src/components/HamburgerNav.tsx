@@ -43,7 +43,14 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, o
   }
 
   return (
-    <div className="hamburger-nav" style={{ position: 'fixed', top: 16, left: 16, zIndex: 1000 }}>
+    <div className="hamburger-nav" style={{ 
+      position: 'fixed', 
+      top: 16, 
+      left: 16, 
+      zIndex: 1000,
+      width: 'auto',
+      maxWidth: 'calc(100vw - 32px)'
+    }}>
       <button
         ref={buttonRef}
         aria-label={open ? 'Close menu' : 'Open menu'}
@@ -53,10 +60,14 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, o
         style={{
           background: 'transparent',
           border: 'none',
-          padding: 8,
+          padding: '12px',
           display: 'inline-flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          minWidth: '48px',
+          minHeight: '48px',
+          width: 'auto',
+          maxWidth: 'none'
         }}
       >
         <span aria-hidden="true" style={{ width: 24, height: 2, background: 'currentColor', display: 'block', position: 'relative' }}>
@@ -71,20 +82,102 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, o
           aria-label="Main menu"
           style={{
             marginTop: 8,
-            minWidth: 160,
+            minWidth: 180,
+            maxWidth: 'calc(100vw - 32px)',
             background: 'var(--menu-bg, #1a1a1a)',
             color: 'inherit',
             border: '1px solid rgba(255,255,255,0.1)',
             borderRadius: 8,
             boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
-            padding: 8
+            padding: 12,
+            position: 'relative',
+            zIndex: 1001
           }}
         >
-          <button role="menuitem" onClick={handleItem(onHome)} style={{ width: '100%', textAlign: 'left' }}>Home</button>
-          <button role="menuitem" onClick={handleItem(onAbout)} style={{ width: '100%', textAlign: 'left' }}>About</button>
-          <button role="menuitem" onClick={handleItem(onLogin)} style={{ width: '100%', textAlign: 'left' }}>Login</button>
-          <button role="menuitem" onClick={handleItem(onLogout)} style={{ width: '100%', textAlign: 'left' }}>Logout</button>
-          <button role="menuitem" onClick={handleItem(onSettings)} style={{ width: '100%', textAlign: 'left' }}>Settings</button>
+          <button 
+            role="menuitem" 
+            onClick={handleItem(onHome)} 
+            style={{ 
+              width: '100%', 
+              textAlign: 'left',
+              padding: '12px 16px',
+              marginBottom: '4px',
+              fontSize: '1rem',
+              minHeight: '44px',
+              background: 'transparent',
+              border: 'none',
+              color: 'inherit'
+            }}
+          >
+            Home
+          </button>
+          <button 
+            role="menuitem" 
+            onClick={handleItem(onAbout)} 
+            style={{ 
+              width: '100%', 
+              textAlign: 'left',
+              padding: '12px 16px',
+              marginBottom: '4px',
+              fontSize: '1rem',
+              minHeight: '44px',
+              background: 'transparent',
+              border: 'none',
+              color: 'inherit'
+            }}
+          >
+            About
+          </button>
+          <button 
+            role="menuitem" 
+            onClick={handleItem(onLogin)} 
+            style={{ 
+              width: '100%', 
+              textAlign: 'left',
+              padding: '12px 16px',
+              marginBottom: '4px',
+              fontSize: '1rem',
+              minHeight: '44px',
+              background: 'transparent',
+              border: 'none',
+              color: 'inherit'
+            }}
+          >
+            Login
+          </button>
+          <button 
+            role="menuitem" 
+            onClick={handleItem(onLogout)} 
+            style={{ 
+              width: '100%', 
+              textAlign: 'left',
+              padding: '12px 16px',
+              marginBottom: '4px',
+              fontSize: '1rem',
+              minHeight: '44px',
+              background: 'transparent',
+              border: 'none',
+              color: 'inherit'
+            }}
+          >
+            Logout
+          </button>
+          <button 
+            role="menuitem" 
+            onClick={handleItem(onSettings)} 
+            style={{ 
+              width: '100%', 
+              textAlign: 'left',
+              padding: '12px 16px',
+              fontSize: '1rem',
+              minHeight: '44px',
+              background: 'transparent',
+              border: 'none',
+              color: 'inherit'
+            }}
+          >
+            Settings
+          </button>
         </div>
       )}
     </div>
