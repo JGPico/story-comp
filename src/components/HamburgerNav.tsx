@@ -4,9 +4,11 @@ interface HamburgerNavProps {
   onLogin?: () => void
   onLogout?: () => void
   onSettings?: () => void
+  onAbout?: () => void
+  onHome?: () => void
 }
 
-export default function HamburgerNav({ onLogin, onLogout, onSettings }: HamburgerNavProps) {
+export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, onHome }: HamburgerNavProps) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -78,6 +80,8 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings }: Hamburge
             padding: 8
           }}
         >
+          <button role="menuitem" onClick={handleItem(onHome)} style={{ width: '100%', textAlign: 'left' }}>Home</button>
+          <button role="menuitem" onClick={handleItem(onAbout)} style={{ width: '100%', textAlign: 'left' }}>About</button>
           <button role="menuitem" onClick={handleItem(onLogin)} style={{ width: '100%', textAlign: 'left' }}>Login</button>
           <button role="menuitem" onClick={handleItem(onLogout)} style={{ width: '100%', textAlign: 'left' }}>Logout</button>
           <button role="menuitem" onClick={handleItem(onSettings)} style={{ width: '100%', textAlign: 'left' }}>Settings</button>
