@@ -1,0 +1,98 @@
+/* HamburgerNav component styles */
+.hamburger-nav {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  width: auto;
+  max-width: calc(100vw - 32px);
+}
+
+.hamburger-nav__button {
+  background: transparent;
+  border: none;
+  padding: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  width: auto;
+  max-width: none;
+  cursor: pointer;
+}
+
+.hamburger-nav__icon {
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  display: block;
+  position: relative;
+}
+
+.hamburger-nav__icon::before,
+.hamburger-nav__icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+}
+
+.hamburger-nav__icon::before {
+  top: -7px;
+}
+
+.hamburger-nav__icon::after {
+  top: 7px;
+}
+
+.hamburger-nav__menu {
+  margin-top: 8px;
+  min-width: 180px;
+  max-width: calc(100vw - 32px);
+  background: var(--menu-bg, #1a1a1a);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  position: relative;
+  z-index: 1001;
+}
+
+.hamburger-nav__item {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.hamburger-nav__item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-nav__item:last-child {
+  margin-bottom: 0;
+}
+
+/* Light theme styles for HamburgerNav */
+@media (prefers-color-scheme: light) {
+  .hamburger-nav__menu {
+    background: var(--menu-bg, #f9f9f9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hamburger-nav__item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

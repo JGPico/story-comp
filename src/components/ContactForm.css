@@ -1,0 +1,132 @@
+/* ContactForm component styles */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.contact-form label > div {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  box-sizing: border-box;
+  min-height: 44px;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.contact-form button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  min-height: 44px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.contact-form button:hover {
+  border-color: #646cff;
+}
+
+.contact-form button:focus,
+.contact-form button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Responsive styles for ContactForm */
+@media (min-width: 480px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 1.1rem;
+    padding: 14px 18px;
+  }
+  
+  .contact-form label > div {
+    font-size: 1rem;
+  }
+  
+  .contact-form button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+@media (min-width: 768px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 1.2rem;
+    padding: 16px 20px;
+  }
+  
+  .contact-form button {
+    padding: 0.7em 1.4em;
+    font-size: 1.1em;
+  }
+}
+
+/* Light theme styles for ContactForm */
+@media (prefers-color-scheme: light) {
+  .contact-form input,
+  .contact-form textarea {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #213547;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: #747bff;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-form button {
+    background-color: #f9f9f9;
+  }
+  
+  .contact-form label > div {
+    color: rgba(33, 53, 71, 0.8);
+  }
+}

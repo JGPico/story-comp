@@ -1,4 +1,6 @@
-import { useState, FormEvent, ChangeEvent } from 'react'
+import { useState } from 'react'
+import type { FormEvent, ChangeEvent } from 'react'
+import './ContactForm.css'
 
 export interface ContactFormData {
   name: string
@@ -32,7 +34,6 @@ interface ContactFormProps {
       onSubmit(formData)
     } else {
       // Default behavior if no handler supplied
-      // eslint-disable-next-line no-console
       console.log('Submitted contact form:', formData)
       alert('Form submitted! Check console for details.')
     }
@@ -40,7 +41,7 @@ interface ContactFormProps {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: 480 }}>
+      <div className="contact-form">
         <label>
           <div>Name</div>
           <input

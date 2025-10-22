@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import './HamburgerNav.css'
 
 interface HamburgerNavProps {
   onLogin?: () => void
@@ -43,138 +44,56 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, o
   }
 
   return (
-    <div className="hamburger-nav" style={{ 
-      position: 'fixed', 
-      top: 16, 
-      left: 16, 
-      zIndex: 1000,
-      width: 'auto',
-      maxWidth: 'calc(100vw - 32px)'
-    }}>
+    <div className="hamburger-nav">
       <button
         ref={buttonRef}
+        className="hamburger-nav__button"
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen(v => !v)}
-        style={{
-          background: 'transparent',
-          border: 'none',
-          padding: '12px',
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minWidth: '48px',
-          minHeight: '48px',
-          width: 'auto',
-          maxWidth: 'none'
-        }}
       >
-        <span aria-hidden="true" style={{ width: 24, height: 2, background: 'currentColor', display: 'block', position: 'relative' }}>
-          <span style={{ position: 'absolute', left: 0, top: -7, width: 24, height: 2, background: 'currentColor' }} />
-          <span style={{ position: 'absolute', left: 0, top: 7, width: 24, height: 2, background: 'currentColor' }} />
-        </span>
+        <span aria-hidden="true" className="hamburger-nav__icon" />
       </button>
       {open && (
         <div
           ref={menuRef}
+          className="hamburger-nav__menu"
           role="menu"
           aria-label="Main menu"
-          style={{
-            marginTop: 8,
-            minWidth: 180,
-            maxWidth: 'calc(100vw - 32px)',
-            background: 'var(--menu-bg, #1a1a1a)',
-            color: 'inherit',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: 8,
-            boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
-            padding: 12,
-            position: 'relative',
-            zIndex: 1001
-          }}
         >
           <button 
             role="menuitem" 
+            className="hamburger-nav__item"
             onClick={handleItem(onHome)} 
-            style={{ 
-              width: '100%', 
-              textAlign: 'left',
-              padding: '12px 16px',
-              marginBottom: '4px',
-              fontSize: '1rem',
-              minHeight: '44px',
-              background: 'transparent',
-              border: 'none',
-              color: 'inherit'
-            }}
           >
             Home
           </button>
           <button 
             role="menuitem" 
+            className="hamburger-nav__item"
             onClick={handleItem(onAbout)} 
-            style={{ 
-              width: '100%', 
-              textAlign: 'left',
-              padding: '12px 16px',
-              marginBottom: '4px',
-              fontSize: '1rem',
-              minHeight: '44px',
-              background: 'transparent',
-              border: 'none',
-              color: 'inherit'
-            }}
           >
             About
           </button>
           <button 
             role="menuitem" 
+            className="hamburger-nav__item"
             onClick={handleItem(onLogin)} 
-            style={{ 
-              width: '100%', 
-              textAlign: 'left',
-              padding: '12px 16px',
-              marginBottom: '4px',
-              fontSize: '1rem',
-              minHeight: '44px',
-              background: 'transparent',
-              border: 'none',
-              color: 'inherit'
-            }}
           >
             Login
           </button>
           <button 
             role="menuitem" 
+            className="hamburger-nav__item"
             onClick={handleItem(onLogout)} 
-            style={{ 
-              width: '100%', 
-              textAlign: 'left',
-              padding: '12px 16px',
-              marginBottom: '4px',
-              fontSize: '1rem',
-              minHeight: '44px',
-              background: 'transparent',
-              border: 'none',
-              color: 'inherit'
-            }}
           >
             Logout
           </button>
           <button 
             role="menuitem" 
+            className="hamburger-nav__item"
             onClick={handleItem(onSettings)} 
-            style={{ 
-              width: '100%', 
-              textAlign: 'left',
-              padding: '12px 16px',
-              fontSize: '1rem',
-              minHeight: '44px',
-              background: 'transparent',
-              border: 'none',
-              color: 'inherit'
-            }}
           >
             Settings
           </button>

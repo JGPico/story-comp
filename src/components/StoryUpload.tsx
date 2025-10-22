@@ -1,5 +1,6 @@
  import { useState, useRef } from 'react'
  import type { ChangeEvent, FormEvent } from 'react'
+ import './StoryUpload.css'
 
 export interface StoryUploadProps {
   onSubmit?: (file: File) => void
@@ -70,31 +71,31 @@ export interface StoryUploadProps {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: 480 }}>
+      <div className="story-upload">
          <label>
            <div>Submit your story (PDF, DOC, DOCX)</div>
-           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+           <div className="story-upload__file-container">
              <input
                ref={fileInputRef}
                type="file"
                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                onChange={handleFileChange}
              />
-             <button type="button" onClick={handleClear}>Clear</button>
+             <button type="button" className="story-upload__clear-button" onClick={handleClear}>Clear</button>
            </div>
          </label>
 
         {selectedFile && (
-          <div>
+          <div className="story-upload__file-info">
             Selected: {selectedFile.name} ({Math.ceil(selectedFile.size / 1024)} KB)
           </div>
         )}
 
         {errorMessage && (
-          <div style={{ color: 'red' }}>{errorMessage}</div>
+          <div className="story-upload__error">{errorMessage}</div>
         )}
 
-        <button type="submit" disabled={!selectedFile}>Upload Story</button>
+        <button type="submit" className="story-upload__submit-button" disabled={!selectedFile}>Upload Story</button>
       </div>
     </form>
   )
