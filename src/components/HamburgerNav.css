@@ -55,9 +55,9 @@
   margin-top: 8px;
   min-width: 180px;
   max-width: calc(100vw - 32px);
-  background: var(--menu-bg, #1a1a1a);
-  color: #dadada;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--menu-bg, var(--bg-button));
+  color: var(--text-light);
+  border: 1px solid var(--border-menu);
   border-radius: 8px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   padding: 12px;
@@ -79,7 +79,7 @@
 }
 
 .hamburger-nav__item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-hover);
 }
 
 .hamburger-nav__item:last-child {
@@ -89,12 +89,12 @@
 /* Light theme styles for HamburgerNav */
 @media (prefers-color-scheme: light) {
   .hamburger-nav__menu {
-    background: var(--menu-bg, #f9f9f9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--menu-bg, var(--bg-button-light-theme));
+    border: 1px solid var(--border-menu-light);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
   .hamburger-nav__item:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-hover-light);
   }
 }

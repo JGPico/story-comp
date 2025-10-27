@@ -18,7 +18,7 @@
 .story-upload label > div {
   margin-bottom: 4px;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-white-muted);
 }
 
 .story-upload__file-container {
@@ -32,10 +32,10 @@
   max-width: 100%;
   padding: 8px;
   font-size: 1rem;
-  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border: 2px dashed var(--border-file);
   border-radius: 8px;
   background-color: transparent;
-  color: #363636;
+  color: var(--text-secondary);
   box-sizing: border-box;
   min-height: 44px;
   cursor: pointer;
@@ -43,19 +43,19 @@
 }
 
 .story-upload input[type="file"]:hover {
-  border-color: #646cff;
-  background-color: rgba(100, 108, 255, 0.1);
+  border-color: var(--border-input-focus);
+  background-color: var(--bg-focus);
 }
 
 .story-upload__clear-button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-button);
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 500;
   font-family: inherit;
-  color: #dadada;
-  background-color: #1a1a1a;
+  color: var(--text-light);
+  background-color: var(--bg-button);
   cursor: pointer;
   transition: border-color 0.25s;
   min-height: 44px;
@@ -64,8 +64,8 @@
 }
 
 .story-upload__clear-button:hover {
-  border-color: #646cff;
-  color: #5f5f5f;
+  border-color: var(--border-button-hover);
+  color: var(--text-button);
 }
 
 .story-upload__clear-button:focus,
@@ -76,29 +76,29 @@
 .story-upload__file-info {
   margin: 8px 0;
   padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-file-info);
   border-radius: 4px;
   font-size: 0.9rem;
 }
 
 .story-upload__error {
-  color: #ff6b6b;
+  color: var(--text-error);
   margin: 8px 0;
   padding: 8px 12px;
-  background-color: rgba(255, 107, 107, 0.1);
+  background-color: var(--bg-error);
   border-radius: 4px;
   font-size: 0.9rem;
 }
 
 .story-upload__submit-button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-button);
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 500;
   font-family: inherit;
-  color: #dadada;
-  background-color: #1a1a1a;
+  color: var(--text-light);
+  background-color: var(--bg-button);
   cursor: pointer;
   transition: border-color 0.25s;
   min-height: 44px;
@@ -108,8 +108,8 @@
 }
 
 .story-upload__submit-button:hover:not(:disabled) {
-  border-color: #646cff;
-  color: #5f5f5f;
+  border-color: var(--border-button-hover);
+  color: var(--text-button);
 }
 
 .story-upload__submit-button:disabled {
@@ -161,28 +161,28 @@
 /* Light theme styles for StoryUpload */
 @media (prefers-color-scheme: light) {
   .story-upload input[type="file"] {
-    border: 2px dashed rgba(0, 0, 0, 0.3);
+    border: 2px dashed var(--border-file-light);
   }
   
   .story-upload input[type="file"]:hover {
-    border-color: #747bff;
-    background-color: rgba(116, 123, 255, 0.1);
+    border-color: var(--border-input-light-focus);
+    background-color: var(--bg-focus-light);
   }
   
   .story-upload__file-info {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--bg-file-info-light);
   }
   
   .story-upload__error {
-    background-color: rgba(255, 107, 107, 0.1);
+    background-color: var(--bg-error);
   }
   
   .story-upload__clear-button,
   .story-upload__submit-button {
-    background-color: #f9f9f9;
+    background-color: var(--bg-button-light-theme);
   }
   
   .story-upload label > div {
-    color: rgba(33, 53, 71, 0.8);
+    color: var(--text-light-theme-muted);
   }
 }
