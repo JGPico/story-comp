@@ -5,14 +5,15 @@ import storage from './firebase.tsx'
 import ContactForm from './components/ContactForm.tsx'
 import StoryUpload from './components/StoryUpload'
 import HamburgerNav from './components/HamburgerNav'
+import LoginWindow from './components/LoginWindow'
 
 console.log(storage)
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about'>('home')
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'login'>('home')
 
   function handleLogin() {
-    alert('Login clicked')
+    setCurrentPage('login')
   }
 
   function handleLogout() {
@@ -81,6 +82,13 @@ function App() {
                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
                deserunt mollit anim id est laborum.</p>
           </>
+        )}
+
+        {currentPage === 'login' && (
+          <LoginWindow
+            onClose={() => setCurrentPage('home')}
+            onLoggedIn={() => setCurrentPage('home')}
+          />
         )}
       </div>
     </>
