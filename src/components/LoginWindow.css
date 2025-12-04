@@ -11,10 +11,13 @@
 .login-window__card {
   width: 100%;
   max-width: 420px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  padding: 20px;
+  background: var(--menu-bg, var(--bg-button));
+  color: var(--text-light);
+  border: 1px solid var(--border-menu);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  z-index: 1001;
 }
 
 .login-window__header {
@@ -24,12 +27,29 @@
   margin-bottom: 8px;
 }
 
+.login-window__header h2 {
+  color: var(--text-light);
+  margin: 0;
+}
+
 .login-window__close {
   background: transparent;
   border: none;
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
+  color: var(--text-light);
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.login-window__close:hover {
+  background-color: var(--bg-hover);
 }
 
 .login-window__tabs {
@@ -40,16 +60,24 @@
 }
 
 .login-window__tab {
-  padding: 8px 12px;
+  padding: 12px 16px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #f7f7f7;
+  border: 1px solid var(--border-menu);
+  background: transparent;
+  color: var(--text-light);
   cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.login-window__tab:hover {
+  background-color: var(--bg-hover);
 }
 
 .login-window__tab.is-active {
-  background: #e9f0ff;
-  border-color: #8bb0ff;
+  background-color: var(--bg-hover);
+  border-color: var(--border-menu);
 }
 
 .login-window__form {
@@ -61,37 +89,113 @@
   display: grid;
   gap: 6px;
   font-weight: 600;
+  color: var(--text-light);
 }
 
 .login-window__input {
   padding: 10px 12px;
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--border-menu);
   border-radius: 8px;
   font-size: 14px;
+  background: var(--bg-input);
+  color: var(--text-light);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.login-window__input:focus {
+  outline: none;
+  background: var(--bg-input-focus);
+  border-color: var(--border-input-focus);
 }
 
 .login-window__error {
-  color: #b42318;
-  background: #fee4e2;
-  border: 1px solid #fecdca;
+  color: var(--text-error);
+  background: var(--bg-error);
+  border: 1px solid var(--border-menu);
   padding: 8px 10px;
   border-radius: 8px;
 }
 
 .login-window__submit {
   margin-top: 4px;
-  padding: 10px 12px;
-  border: none;
-  background: #2563eb;
-  color: #fff;
+  padding: 12px 16px;
+  border: 1px solid var(--border-menu);
+  background: transparent;
+  color: var(--text-light);
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.login-window__submit:hover {
+  background-color: var(--bg-hover);
 }
 
 .login-window__submit:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+}
+
+/* Light theme styles for LoginWindow */
+@media (prefers-color-scheme: light) {
+  .login-window__card {
+    background: var(--menu-bg, var(--bg-button-light-theme));
+    border: 1px solid var(--border-menu-light);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: var(--text-light-theme);
+  }
+
+  .login-window__header h2 {
+    color: var(--text-light-theme);
+  }
+
+  .login-window__close {
+    color: var(--text-light-theme);
+  }
+
+  .login-window__close:hover {
+    background-color: var(--bg-hover-light);
+  }
+
+  .login-window__tab {
+    border: 1px solid var(--border-menu-light);
+    color: var(--text-light-theme);
+  }
+
+  .login-window__tab:hover {
+    background-color: var(--bg-hover-light);
+  }
+
+  .login-window__tab.is-active {
+    background-color: var(--bg-hover-light);
+  }
+
+  .login-window__label {
+    color: var(--text-light-theme);
+  }
+
+  .login-window__input {
+    border: 1px solid var(--border-menu-light);
+    background: var(--bg-input-light);
+    color: var(--text-light-theme);
+  }
+
+  .login-window__input:focus {
+    background: var(--bg-input-light-focus);
+    border-color: var(--border-input-light-focus);
+  }
+
+  .login-window__submit {
+    border: 1px solid var(--border-menu-light);
+    color: var(--text-light-theme);
+  }
+
+  .login-window__submit:hover {
+    background-color: var(--bg-hover-light);
+  }
 }
 
 
