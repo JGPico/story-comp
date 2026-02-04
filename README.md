@@ -126,3 +126,19 @@ You can deploy the app using Firebase App Hosting. In general:
 
 Refer to the Firebase App Hosting docs for details on configuring `apphosting.yaml` and project-level settings.
 
+---
+
+## 6. Deploying to Netlify
+
+The repo includes a `netlify.toml` so Netlify uses the right build command and publish directory.
+
+1. **Push your code** to GitHub, GitLab, or Bitbucket.
+
+2. **In Netlify:** [Add new site](https://app.netlify.com/start) → **Import an existing project** → choose your repo. Netlify will pick up `netlify.toml` (build: `npm run build`, publish: `dist`).
+
+3. **Set environment variables** in Netlify (Site settings → Environment variables). Add the same Firebase env vars you use locally (all `VITE_FIREBASE_*` from your `.env.local`). Without these, the app will fail at runtime.
+
+4. **Deploy.** Netlify will build and publish the site; later pushes to your main branch can trigger automatic deploys.
+
+For local-style builds you can run `netlify deploy --build` (requires [Netlify CLI](https://docs.netlify.com/cli/get-started/) and `netlify link`).
+
