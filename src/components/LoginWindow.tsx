@@ -17,6 +17,10 @@ export default function LoginWindow({ onClose, onLoggedIn }: LoginWindowProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!firebase.auth) {
+      setError('Firebase is not configured. Set VITE_FIREBASE_* environment variables.')
+      return
+    }
     setError(null)
     setSubmitting(true)
     try {

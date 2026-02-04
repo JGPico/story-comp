@@ -1,13 +1,11 @@
  
 import { useState } from 'react'
 import './App.css'
-import storage from './firebase.tsx'
+import firebase from './firebase.tsx'
 import ContactForm from './components/ContactForm.tsx'
 import StoryUpload from './components/StoryUpload'
 import HamburgerNav from './components/HamburgerNav'
 import LoginWindow from './components/LoginWindow'
-
-console.log(storage)
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'login'>('home')

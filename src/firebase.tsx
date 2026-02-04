@@ -1,18 +1,22 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
-import { config } from './config'
+import type { Auth } from "firebase/auth";
+import type { FirebaseStorage } from "firebase/storage";
+import { config, configError } from './config'
 
-// Initialize Firebase with environment-driven configuration
-const app = initializeApp(config.firebase);
-//const analytics = getAnalytics(app);
+let auth: Auth | null = null
+let storage: FirebaseStorage | null = null
 
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+if (!configError && config) {
+  const app = initializeApp(config.firebase);
+  auth = getAuth(app);
+  storage = getStorage(app);
+}
 
-// Initialize Cloud Storage and get a reference to the service
-const storage = getStorage(app);
-
-export default { storage, auth };
+export default {
+  auth,
+  storage,
+  error: configError,
+};
