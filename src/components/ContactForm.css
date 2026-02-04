@@ -49,6 +49,17 @@
   font-family: inherit;
 }
 
+.contact-form-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--error-color, #c00);
+}
+
+.contact-form input[aria-invalid="true"] {
+  border-color: var(--error-color, #c00);
+}
+
 .contact-form button {
   border-radius: 8px;
   border: 1px solid var(--border-button);

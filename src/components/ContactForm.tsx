@@ -13,27 +13,63 @@ interface ContactFormProps {
   onSubmit?: (data: ContactFormData) => void
 }
 
- function ContactForm({ onSubmit }: ContactFormProps) {
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_REGEX = /^[\d\s\-+()]{7,}$/
+
+function validateEmail(value: string): string | null {
+  if (!value.trim()) return 'Email is required.'
+  if (!EMAIL_REGEX.test(value)) return 'Please enter a valid email address.'
+  return null
+}
+
+function validatePhone(value: string): string | null {
+  if (!value.trim()) return 'Phone number is required.'
+  const digitsOnly = value.replace(/\D/g, '')
+  if (digitsOnly.length < 7) return 'Please enter at least 7 digits.'
+  if (!PHONE_REGEX.test(value)) return 'Please enter a valid phone number (digits, spaces, dashes, parentheses, or +).'
+  return null
+}
+
+function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     address: '',
     email: '',
     phone: ''
   })
+  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({})
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target
     setFormData(prev => ({ ...prev, [name]: value }))
+    if (name === 'email') {
+      setErrors(prev => ({ ...prev, email: value ? validateEmail(value) ?? undefined : undefined }))
+    }
+    if (name === 'phone') {
+      setErrors(prev => ({ ...prev, phone: value ? validatePhone(value) ?? undefined : undefined }))
+    }
+  }
+
+  const handleBlur = (event: { target: { name: string; value: string } }) => {
+    const { name, value } = event.target
+    if (name === 'email') setErrors(prev => ({ ...prev, email: validateEmail(value) ?? undefined }))
+    if (name === 'phone') setErrors(prev => ({ ...prev, phone: validatePhone(value) ?? undefined }))
   }
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const emailError = validateEmail(formData.email)
+    const phoneError = validatePhone(formData.phone)
+    setErrors({
+      email: emailError ?? undefined,
+      phone: phoneError ?? undefined
+    })
+    if (emailError ?? phoneError) return
     if (onSubmit) {
       onSubmit(formData)
     } else {
-      // Default behavior if no handler supplied
       console.log('Submitted contact form:', formData)
       alert('Form submitted! Check console for details.')
     }
@@ -73,9 +109,17 @@ interface ContactFormProps {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="willy@example.com"
             required
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
           />
+          {errors.email && (
+            <span id="email-error" className="contact-form-error" role="alert">
+              {errors.email}
+            </span>
+          )}
         </label>
 
         <label>
@@ -85,11 +129,17 @@ interface ContactFormProps {
             type="tel"
             value={formData.phone}
             onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="(555) 123-4567"
-            pattern="[+()\-\s\d]{7,}"
-            title="Please enter a valid phone number"
             required
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? 'phone-error' : undefined}
           />
+          {errors.phone && (
+            <span id="phone-error" className="contact-form-error" role="alert">
+              {errors.phone}
+            </span>
+          )}
         </label>
 
         <button type="submit">Submit</button>
