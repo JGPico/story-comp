@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "24"
 
 # SPA: serve index.html for client-side routes (if you add routing later)
 [[redirects]]

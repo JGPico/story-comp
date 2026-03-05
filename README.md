@@ -12,9 +12,9 @@ The main UI lets users:
 
 ## Prerequisites
 
-- **Node.js**: v18+ (v20+ recommended)
+- **Node.js**: v22.12+ (see `.nvmrc`; use `nvm use` or `fnm use` in the project)
 - **npm**: comes with Node
-- **Firebase CLI** (optional, for emulators/deploy): `npm install -g firebase-tools`
+- **Firebase CLI**: included via `firebase-tools`; run `npm run firebase -- <command>` (e.g. `npm run firebase -- login`)
 
 ---
 
@@ -62,7 +62,7 @@ Then open the URL shown in the terminal (by default `http://localhost:5173`).
 You can also run via Firebase App Hosting emulator, which will start `npm run dev` for you:
 
 ```bash
-firebase emulators:start --only apphosting
+npm run firebase -- emulators:start --only apphosting
 ```
 
 ---
@@ -104,6 +104,13 @@ All commands are run from the project root:
   npm run lint
   ```
 
+- **Firebase CLI** (emulators, deploy, login, etc.)
+
+  ```bash
+  npm run firebase -- <command>
+  ```
+  Examples: `npm run firebase -- login`, `npm run firebase -- emulators:start --only apphosting`, `npm run firebase -- apphosting:deploy`
+
 ---
 
 ## 5. Deploying with Firebase App Hosting (outline)
@@ -113,15 +120,15 @@ You can deploy the app using Firebase App Hosting. In general:
 1. **Log in and select your project**
 
    ```bash
-   firebase login
-   firebase use <your-firebase-project-id>
+   npm run firebase -- login
+   npm run firebase -- use <your-firebase-project-id>
    ```
 
 2. **Build and deploy**
 
    ```bash
    npm run build
-   firebase apphosting:deploy
+   npm run firebase -- apphosting:deploy
    ```
 
 Refer to the Firebase App Hosting docs for details on configuring `apphosting.yaml` and project-level settings.
