@@ -1,10 +1,11 @@
- 
+
 import { useState } from 'react'
 import './App.css'
 import ContactForm from './components/ContactForm.tsx'
 import StoryUpload from './components/StoryUpload'
 import HamburgerNav from './components/HamburgerNav'
 import LoginWindow from './components/LoginWindow'
+import firebase from './firebase.tsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'login'>('home')
@@ -29,11 +30,13 @@ function App() {
     setCurrentPage('home')
   }
 
+  console.log("Firebase: ", firebase)
+
   return (
     <>
-      <HamburgerNav 
-        onLogin={handleLogin} 
-        onLogout={handleLogout} 
+      <HamburgerNav
+        onLogin={handleLogin}
+        onLogout={handleLogout}
         onSettings={handleSettings}
         onAbout={handleAbout}
         onHome={handleHome}
@@ -43,12 +46,12 @@ function App() {
           <>
             <h1>Literary Submission</h1>
             <p>Writing is cool. You should write. "Lorem ipsum dolor sit amet,
-               consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+              ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+              irure dolor in reprehenderit in voluptate velit esse cillum dolore
+              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 
             <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
               doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
@@ -68,16 +71,16 @@ function App() {
             </div>
           </>
         )}
-        
+
         {currentPage === 'about' && (
           <>
             <h1>About</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-               exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-               irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-               pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-               deserunt mollit anim id est laborum.</p>
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+              deserunt mollit anim id est laborum.</p>
           </>
         )}
 
