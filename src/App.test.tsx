@@ -35,7 +35,7 @@ describe('App', () => {
     
     // Check that login window is rendered
     expect(screen.getByRole('dialog')).toBeInTheDocument()
-    expect(screen.getByText('Sign In')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Sign In' })).toBeInTheDocument()
   })
 
   it('renders about page when about is clicked', async () => {

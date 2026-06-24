@@ -8,7 +8,7 @@ describe('LoginWindow', () => {
     render(<LoginWindow />)
 
     expect(screen.getByRole('dialog')).toBeInTheDocument()
-    expect(screen.getByText('Sign In')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Sign In' })).toBeInTheDocument()
     expect(screen.getByLabelText('Email')).toBeInTheDocument()
     expect(screen.getByLabelText('Password')).toBeInTheDocument()
   })
@@ -20,7 +20,7 @@ describe('LoginWindow', () => {
     const signUpTab = screen.getByRole('tab', { name: 'Sign Up' })
     await user.click(signUpTab)
 
-    expect(screen.getByText('Create Account')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Create Account' })).toBeInTheDocument()
     expect(screen.getByLabelText('Confirm Password')).toBeInTheDocument()
   })
 
