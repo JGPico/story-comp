@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './css/LoginWindow.css'
-import firebase from '../firebase'
 
 interface LoginWindowProps {
   onClose?: () => void
@@ -17,29 +16,17 @@ export default function LoginWindow({ onClose, onLoggedIn }: LoginWindowProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!firebase.auth) {
-      setError('Firebase is not configured. Set VITE_FIREBASE_* environment variables.')
+    setError(null)
+
+    if (mode === 'signup' && password !== confirmPassword) {
+      setError('Passwords do not match')
       return
     }
-    setError(null)
+
     setSubmitting(true)
     try {
-      if (mode === 'signin') {
-        const { signInWithEmailAndPassword } = await import('firebase/auth')
-        await signInWithEmailAndPassword(firebase.auth, email, password)
-      } else {
-        if (password !== confirmPassword) {
-          setError('Passwords do not match')
-          setSubmitting(false)
-          return
-        }
-        const { createUserWithEmailAndPassword } = await import('firebase/auth')
-        await createUserWithEmailAndPassword(firebase.auth, email, password)
-      }
       if (onLoggedIn) onLoggedIn()
       if (onClose) onClose()
-    } catch (err) {
-      setError((err as Error).message)
     } finally {
       setSubmitting(false)
     }
@@ -124,5 +111,3 @@ export default function LoginWindow({ onClose, onLoggedIn }: LoginWindowProps) {
     </div>
   )
 }
-
-

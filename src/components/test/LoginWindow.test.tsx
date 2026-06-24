@@ -1,26 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LoginWindow from '../LoginWindow'
 
-// Mock Firebase
-vi.mock('../firebase', () => ({
-  default: {
-    auth: {},
-  },
-}))
-
-// Mock Firebase Auth functions
-vi.mock('firebase/auth', () => ({
-  signInWithEmailAndPassword: vi.fn(() => Promise.resolve({})),
-  createUserWithEmailAndPassword: vi.fn(() => Promise.resolve({})),
-}))
-
 describe('LoginWindow', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
   it('renders sign in form by default', () => {
     render(<LoginWindow />)
 
@@ -64,30 +47,23 @@ describe('LoginWindow', () => {
     const user = userEvent.setup()
     render(<LoginWindow />)
 
-    // Switch to sign up mode
     const signUpTab = screen.getByRole('tab', { name: 'Sign Up' })
     await user.click(signUpTab)
 
-    // Fill in form
     await user.type(screen.getByLabelText('Email'), 'test@example.com')
     await user.type(screen.getByLabelText('Password'), 'password123')
     await user.type(screen.getByLabelText('Confirm Password'), 'different')
 
-    // Submit form
     const submitButton = screen.getByRole('button', { name: 'Create Account' })
     await user.click(submitButton)
 
     expect(screen.getByText('Passwords do not match')).toBeInTheDocument()
   })
 
-  it('disables submit button when submitting', async () => {
+  it('calls onLoggedIn when sign in form is submitted', async () => {
     const user = userEvent.setup()
-    const { signInWithEmailAndPassword } = await import('firebase/auth')
-    vi.mocked(signInWithEmailAndPassword).mockImplementation(
-      () => new Promise(() => { }) // Never resolves
-    )
-
-    render(<LoginWindow />)
+    const onLoggedIn = vi.fn()
+    render(<LoginWindow onLoggedIn={onLoggedIn} />)
 
     await user.type(screen.getByLabelText('Email'), 'test@example.com')
     await user.type(screen.getByLabelText('Password'), 'password123')
@@ -95,8 +71,7 @@ describe('LoginWindow', () => {
     const submitButton = screen.getByRole('button', { name: 'Sign In' })
     await user.click(submitButton)
 
-    expect(submitButton).toBeDisabled()
-    expect(screen.getByText('Please wait…')).toBeInTheDocument()
+    expect(onLoggedIn).toHaveBeenCalledTimes(1)
   })
 
   it('requires email and password fields', () => {
@@ -109,6 +84,3 @@ describe('LoginWindow', () => {
     expect(passwordInput).toBeRequired()
   })
 })
-
-
-

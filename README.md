@@ -1,20 +1,35 @@
 ## Story Comp
 
-React + TypeScript + Vite app for submitting literary work, with Firebase Authentication and Cloud Storage.
+A literary submission app with a **React + TypeScript + Vite** frontend and an **Express + TypeScript** backend.
 
-The main UI lets users:
-- **Browse the home page** with project copy
-- **Submit a message** via the contact form
-- **Upload a story file** (stored in Firebase Storage)
-- **Open a login window** backed by Firebase Auth
+Users can browse the home page, submit a contact form, upload a story file, and open a login window. The login UI is in place; backend auth and file storage are not wired up yet.
+
+---
+
+## Project structure
+
+```
+story-comp/
+├── server/           # Express API (TypeScript)
+│   └── server.ts
+├── src/              # React frontend
+├── dist/             # Build output (frontend + compiled server)
+├── tsconfig.app.json # Frontend TypeScript config
+├── tsconfig.server.json
+└── netlify.toml      # Frontend deploy config
+```
+
+| Part | Stack | Default URL |
+|------|--------|-------------|
+| Frontend | React, Vite, TypeScript | `http://localhost:5173` |
+| Backend | Express, TypeScript, tsx | `http://localhost:5432` |
 
 ---
 
 ## Prerequisites
 
-- **Node.js**: v22.12+ (see `.nvmrc`; use `nvm use` or `fnm use` in the project)
-- **npm**: comes with Node
-- **Firebase CLI**: included via `firebase-tools`; run `npm run firebase -- <command>` (e.g. `npm run firebase -- login`)
+- **Node.js** v22.12+ (see `.nvmrc`; run `nvm use` or `fnm use` in the project)
+- **npm** (included with Node)
 
 ---
 
@@ -28,124 +43,85 @@ npm install
 
 ---
 
-## 2. Configure Firebase environment
+## 2. Run locally
 
-This project reads Firebase config from Vite env variables in `src/config.ts`.  
-Create a `.env.local` (or `.env`) file in the project root with:
-
-```bash
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id   # optional
-```
-
-> **Note:** All required `VITE_` variables must be set; otherwise the app will throw an error at startup.
-
----
-
-## 3. Run the app locally
-
-Start the Vite dev server:
+### Frontend
 
 ```bash
 npm run dev
 ```
 
-Then open the URL shown in the terminal (by default `http://localhost:5173`).
+Open the URL shown in the terminal (default `http://localhost:5173`).
 
-### Using Firebase Emulator UI (optional)
+### Backend
 
-You can also run via Firebase App Hosting emulator, which will start `npm run dev` for you:
+In a second terminal:
 
 ```bash
-npm run firebase -- emulators:start --only apphosting
+npm run dev:server
 ```
 
----
-
-## 4. Scripts
-
-All commands are run from the project root:
-
-- **Start dev server**
-
-  ```bash
-  npm run dev
-  ```
-
-- **Type-check & production build**
-
-  ```bash
-  npm run build
-  ```
-
-- **Preview production build locally**
-
-  ```bash
-  npm run preview
-  ```
-
-- **Run tests (Vitest)**
-
-  ```bash
-  npm test
-  # or
-  npm run test:ui
-  npm run test:coverage
-  ```
-
-- **Run ESLint**
-
-  ```bash
-  npm run lint
-  ```
-
-- **Firebase CLI** (emulators, deploy, login, etc.)
-
-  ```bash
-  npm run firebase -- <command>
-  ```
-  Examples: `npm run firebase -- login`, `npm run firebase -- emulators:start --only apphosting`, `npm run firebase -- apphosting:deploy`
+The API listens on port **5432** (or set `PORT` in the environment). A health check is available at `http://localhost:5432/`.
 
 ---
 
-## 5. Deploying with Firebase App Hosting (outline)
+## 3. Scripts
 
-You can deploy the app using Firebase App Hosting. In general:
+All commands are run from the project root.
 
-1. **Log in and select your project**
+### Frontend
 
-   ```bash
-   npm run firebase -- login
-   npm run firebase -- use <your-firebase-project-id>
-   ```
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | Type-check and build frontend to `dist/` |
+| `npm run preview` | Serve the production frontend build locally |
 
-2. **Build and deploy**
+### Backend
 
-   ```bash
-   npm run build
-   npm run firebase -- apphosting:deploy
-   ```
+| Command | Description |
+|---------|-------------|
+| `npm run dev:server` | Run Express with `tsx` (reloads on file changes) |
+| `npm run build:server` | Compile `server/` to `dist/server/` |
+| `npm run start:server` | Run the compiled server (`node dist/server/server.js`) |
 
-Refer to the Firebase App Hosting docs for details on configuring `apphosting.yaml` and project-level settings.
+### Quality
+
+| Command | Description |
+|---------|-------------|
+| `npm test` | Run Vitest tests |
+| `npm run test:ui` | Vitest UI |
+| `npm run test:coverage` | Vitest with coverage |
+| `npm run lint` | ESLint |
 
 ---
 
-## 6. Deploying to Netlify
+## 4. TypeScript
 
-The repo includes a `netlify.toml` so Netlify uses the right build command and publish directory.
+- **Frontend:** `tsconfig.app.json` — React app under `src/`
+- **Backend:** `tsconfig.server.json` — Express app under `server/`, emits to `dist/server/`
+- **Tooling:** `tsconfig.node.json` — Vite config
 
-1. **Push your code** to GitHub, GitLab, or Bitbucket.
+`npm run build` type-checks the frontend (and related projects via `tsc -b`). Use `npm run build:server` to compile the API separately.
 
-2. **In Netlify:** [Add new site](https://app.netlify.com/start) → **Import an existing project** → choose your repo. Netlify will pick up `netlify.toml` (build: `npm run build`, publish: `dist`).
+---
 
-3. **Set environment variables** in Netlify (Site settings → Environment variables). Add the same Firebase env vars you use locally (all `VITE_FIREBASE_*` from your `.env.local`). Without these, the app will fail at runtime.
+## 5. Deploying the frontend (Netlify)
 
-4. **Deploy.** Netlify will build and publish the site; later pushes to your main branch can trigger automatic deploys.
+The repo includes `netlify.toml` (build: `npm run build`, publish: `dist`). No environment variables are required for the frontend.
 
-For local-style builds you can run `netlify deploy --build` (requires [Netlify CLI](https://docs.netlify.com/cli/get-started/) and `netlify link`).
+1. Push the repo to GitHub, GitLab, or Bitbucket.
+2. In [Netlify](https://app.netlify.com/start), import the project.
+3. Deploy; later pushes to the linked branch can trigger automatic deploys.
 
+For a local Netlify-style build: `netlify deploy --build` (requires the [Netlify CLI](https://docs.netlify.com/cli/get-started/) and `netlify link`).
+
+The Express API is not deployed by Netlify. Host it separately (e.g. Railway, Render, Fly.io, or your own server) with `npm run build:server` and `npm run start:server`, and point the frontend at that API when you add API calls.
+
+---
+
+## 6. Next steps
+
+- Connect the contact form and story upload to Express routes
+- Add authentication on the server and hook up the login window
+- Configure CORS and a `VITE_API_URL` (or similar) for the frontend to call the API in development and production

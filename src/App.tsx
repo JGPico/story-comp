@@ -5,7 +5,6 @@ import ContactForm from './components/ContactForm.tsx'
 import StoryUpload from './components/StoryUpload'
 import HamburgerNav from './components/HamburgerNav'
 import LoginWindow from './components/LoginWindow'
-import firebase from './firebase.tsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'login'>('home')
@@ -29,8 +28,6 @@ function App() {
   function handleHome() {
     setCurrentPage('home')
   }
-
-  console.log("Firebase: ", firebase)
 
   return (
     <>
