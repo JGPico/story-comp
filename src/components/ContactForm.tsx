@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent, ChangeEvent } from 'react'
-import './ContactForm.css'
+import './css/ContactForm.css'
 
 export interface ContactFormData {
   name: string

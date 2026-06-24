@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import './HamburgerNav.css'
+import './css/HamburgerNav.css'
 
 interface HamburgerNavProps {
   onLogin?: () => void
@@ -62,38 +62,38 @@ export default function HamburgerNav({ onLogin, onLogout, onSettings, onAbout, o
           role="menu"
           aria-label="Main menu"
         >
-          <button 
-            role="menuitem" 
+          <button
+            role="menuitem"
             className="hamburger-nav__item"
-            onClick={handleItem(onHome)} 
+            onClick={handleItem(onHome)}
           >
             Home
           </button>
-          <button 
-            role="menuitem" 
+          <button
+            role="menuitem"
             className="hamburger-nav__item"
-            onClick={handleItem(onAbout)} 
+            onClick={handleItem(onAbout)}
           >
             About
           </button>
-          <button 
-            role="menuitem" 
+          <button
+            role="menuitem"
             className="hamburger-nav__item"
-            onClick={handleItem(onLogin)} 
+            onClick={handleItem(onLogin)}
           >
             Login
           </button>
-          <button 
-            role="menuitem" 
+          <button
+            role="menuitem"
             className="hamburger-nav__item"
-            onClick={handleItem(onLogout)} 
+            onClick={handleItem(onLogout)}
           >
             Logout
           </button>
-          <button 
-            role="menuitem" 
+          <button
+            role="menuitem"
             className="hamburger-nav__item"
-            onClick={handleItem(onSettings)} 
+            onClick={handleItem(onSettings)}
           >
             Settings
           </button>

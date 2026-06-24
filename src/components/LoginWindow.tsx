@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './LoginWindow.css'
+import './css/LoginWindow.css'
 import firebase from '../firebase'
 
 interface LoginWindowProps {

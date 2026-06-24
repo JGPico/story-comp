@@ -1,13 +1,13 @@
- import { useState, useRef } from 'react'
- import type { ChangeEvent, FormEvent } from 'react'
- import './StoryUpload.css'
+import { useState, useRef } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
+import './css/StoryUpload.css'
 
 export interface StoryUploadProps {
   onSubmit?: (file: File) => void
   maxSizeBytes?: number
 }
 
- function StoryUpload({ onSubmit, maxSizeBytes = 10 * 1024 * 1024 }: StoryUploadProps) {
+function StoryUpload({ onSubmit, maxSizeBytes = 10 * 1024 * 1024 }: StoryUploadProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -49,7 +49,7 @@ export interface StoryUploadProps {
       return
     }
 
-     if (onSubmit) {
+    if (onSubmit) {
       onSubmit(selectedFile)
     } else {
       console.log('Submitted story file:', {
@@ -72,18 +72,18 @@ export interface StoryUploadProps {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="story-upload">
-         <label>
-           <div>Submit your story (PDF, DOC, DOCX)</div>
-           <div className="story-upload__file-container">
-             <input
-               ref={fileInputRef}
-               type="file"
-               accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-               onChange={handleFileChange}
-             />
-             <button type="button" className="story-upload__clear-button" onClick={handleClear}>Clear</button>
-           </div>
-         </label>
+        <label>
+          <div>Submit your story (PDF, DOC, DOCX)</div>
+          <div className="story-upload__file-container">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              onChange={handleFileChange}
+            />
+            <button type="button" className="story-upload__clear-button" onClick={handleClear}>Clear</button>
+          </div>
+        </label>
 
         {selectedFile && (
           <div className="story-upload__file-info">
