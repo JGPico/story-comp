@@ -3,6 +3,8 @@ import express from 'express'
 const app = express()
 const port = Number(process.env.PORT) || 5432
 
+app.use(express.json())
+
 // TODO Create a Dockerfile
 // TODO Create a docker-compose.yml file
 // TODO Create a .dockerignore file
@@ -21,7 +23,6 @@ const port = Number(process.env.PORT) || 5432
 // TODO: Add security
 // TODO: Add monitoring
 
-// TODO: Add middleware to parse JSON bodies
 // TODO: Add middleware to log requests
 // TODO: Add middleware to add CORS headers
 // TODO: Add middleware to add security headers
@@ -34,7 +35,23 @@ const port = Number(process.env.PORT) || 5432
 // TODO: Add deployment
 
 app.get('/', (_req, res) => {
-  res.send('You have reached the api for story comp')
+  res.status(200).send({
+    Hello: "You have reached the api for story comp",
+    Banana: "is delicious"
+  })
+})
+
+app.post("/lemon/:id", (req, res) => {
+  const { id } = req.params;
+  const { bod } = req.body;
+
+  if (!bod) {
+    res.status(418).send({ message: "Failed to post. Body of message required" })
+  }
+
+  res.status(202).send({
+    success: `Your ${bod} was received with id ${id}`
+  })
 })
 
 app.listen(port, () => {
