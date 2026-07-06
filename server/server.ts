@@ -1,10 +1,11 @@
-import express, { type Express, type Request, type Response } from 'express';
+import express, { type NextFunction, type Express, type Request, type Response } from 'express';
 import userRouter from "./routes/users.js"
 
 const app: Express = express();
 const port = Number(process.env.PORT) || 5432
 
 app.use(express.json())
+app.use(logger)
 
 // TODO Create a Dockerfile
 // TODO Create a docker-compose.yml file
@@ -56,6 +57,11 @@ app.post("/lemon/:id", (req: Request, res: Response) => {
 })
 
 app.use("/users", userRouter)
+
+function logger(req: Request, _res: Response, next: NextFunction) {
+  console.log(req.originalUrl)
+  next()
+}
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
