@@ -1,6 +1,7 @@
-import express from 'express'
+import express, { type Express, type Request, type Response } from 'express';
+import userRouter from "./routes/users.js"
 
-const app = express()
+const app: Express = express();
 const port = Number(process.env.PORT) || 5432
 
 app.use(express.json())
@@ -34,25 +35,27 @@ app.use(express.json())
 
 // TODO: Add deployment
 
-app.get('/', (_req, res) => {
-  res.status(200).send({
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
     Hello: "You have reached the api for story comp",
     Banana: "is delicious"
   })
 })
 
-app.post("/lemon/:id", (req, res) => {
+app.post("/lemon/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const { bod } = req.body;
 
   if (!bod) {
-    res.status(418).send({ message: "Failed to post. Body of message required" })
+    res.status(418).json({ message: "Failed to post. Body of message required" })
   }
 
-  res.status(202).send({
+  res.status(202).json({
     success: `Your ${bod} was received with id ${id}`
   })
 })
+
+app.use("/users", userRouter)
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
