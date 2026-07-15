@@ -38,8 +38,7 @@ app.use(logger)
 
 app.get('/', (_req: Request, res: Response) => {
   res.status(200).json({
-    Hello: "You have reached the api for story comp",
-    Banana: "is delicious"
+    Hello: "You have reached the api for story comp"
   })
 })
 

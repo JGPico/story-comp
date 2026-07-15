@@ -1,4 +1,4 @@
-import express, { type NextFunction, type Request, type Response } from 'express';
+import express, { type Request, type Response } from 'express';
 const router = express.Router()
 
 router.get('/', (_req: Request, res: Response) => {
@@ -18,7 +18,6 @@ router.post("/", (_req: Request, res: Response) => {
 router.route("/:id")
     .get((req: Request, res: Response) => {
         const myid = req.params.id
-        console.log(req.user)
         res.status(200).json({ "user": `Get user with ID ${myid}` })
     })
     .put((req: Request, res: Response) => {
@@ -29,12 +28,5 @@ router.route("/:id")
         const myid = req.params.id
         res.status(200).json({ "user": `Delete user with ID ${myid}` })
     })
-
-const users = [{ name: "Greg" }, { name: "Lily" }]
-router.param("id", (req: Request, _res: Response, next: NextFunction, id) => {
-    req.user = users[id]
-    next()
-})
-
 
 export default router;
