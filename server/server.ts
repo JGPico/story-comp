@@ -65,3 +65,5 @@ function logger(req: Request, _res: Response, next: NextFunction) {
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
 })
+
+//add database interactions
