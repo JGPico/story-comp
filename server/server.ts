@@ -1,4 +1,5 @@
 import express, { type NextFunction, type Express, type Request, type Response } from 'express';
+import Client from 'pg'
 import userRouter from "./routes/users.js"
 
 const app: Express = express();
@@ -6,6 +7,11 @@ const port = Number(process.env.PORT) || 5432
 
 app.use(express.json())
 app.use(logger)
+const con = new Client({
+  host: "localhost",
+  user: "postgres",
+  port: port,
+})
 
 // TODO Create a Dockerfile
 // TODO Create a docker-compose.yml file
