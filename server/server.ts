@@ -1,22 +1,13 @@
 import express, { type NextFunction, type Express, type Request, type Response } from 'express';
-import Client from 'pg'
 import userRouter from "./routes/users.js"
+import pool from "./db.js"
 
 const app: Express = express();
 const port = Number(process.env.PORT) || 5432
-const pass = process.env.DB_PASSWORD
 
 app.use(express.json())
 app.use(logger)
 
-const con = new Client({
-  host: "localhost",
-  user: "postgres",
-  port: port,
-  password: pass,
-  database: "demodb",
-
-})
 
 // TODO Create a Dockerfile
 // TODO Create a docker-compose.yml file
@@ -47,9 +38,10 @@ const con = new Client({
 
 // TODO: Add deployment
 
-app.get('/', (_req: Request, res: Response) => {
+app.get('/', async (_req: Request, res: Response) => {
+  const result = await pool.query("SELECT current_database()");
   res.status(200).json({
-    Hello: "You have reached the api for story comp"
+    Hello: `You have reached the api for story comp. The db is ${result.rows[0].current_database}`
   })
 })
 

@@ -8,4 +8,9 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
 });
 
+pool.on("connect", () => {
+    console.log("Connection pool established with database")
+})
+
 module.exports = pool;
+
