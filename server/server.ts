@@ -4,13 +4,18 @@ import userRouter from "./routes/users.js"
 
 const app: Express = express();
 const port = Number(process.env.PORT) || 5432
+const pass = process.env.DB_PASSWORD
 
 app.use(express.json())
 app.use(logger)
+
 const con = new Client({
   host: "localhost",
   user: "postgres",
   port: port,
+  password: pass,
+  database: "demodb",
+
 })
 
 // TODO Create a Dockerfile
