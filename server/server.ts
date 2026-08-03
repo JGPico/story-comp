@@ -8,7 +8,6 @@ const port = Number(process.env.PORT) || 5432
 app.use(express.json())
 app.use(logger)
 
-
 // TODO Create a Dockerfile
 // TODO Create a docker-compose.yml file
 // TODO Create a .dockerignore file
